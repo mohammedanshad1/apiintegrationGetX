@@ -10,29 +10,31 @@ String modelToJson(List<Model> data) => json.encode(List<dynamic>.from(data.map(
 
 class Model {
   int? id;
-   String? title;
-  int? price;String? description;
+  String? title;
+  double? price;
+  String? description;
   String? category;
   String? image;
   Rating? rating;
 
   Model({
-     this.id,
-     this.title,
-   this.price, this.description,
+    this.id,
+    this.title,
+    this.price,
+    this.description,
     this.category,
-   this.image,
+    this.image,
     this.rating,
   });
 
   factory Model.fromJson(Map<String, dynamic> json) => Model(
-    id: json["id"] as int,
-    title: json["title"] as String? ,
-    price: json["price"]?.toDouble(),
-    description: json["description"] as String?,
-    category: json["category"] as String? ,
-    image: json["image"] as String? ,
-    rating: Rating.fromJson(json["rating"]) as Rating?,
+    id: json["id"]??0,
+    title: json["title"]??'' ,
+    price: json["price"]?.toDouble() ?? 0.0,
+    description: json["description"]??"",
+    category: json["category"]??'' ,
+    image: json["image"]??'' ,
+    rating: Rating.fromJson(json["rating"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -51,7 +53,7 @@ class Rating {
   int? count;
 
   Rating({
-   this.rate,
+    this.rate,
     this.count,
   });
 

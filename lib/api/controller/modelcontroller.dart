@@ -2,28 +2,31 @@ import 'package:apiintegrationnew/api/model/model.dart';
 import 'package:apiintegrationnew/api/service/httpservicenew.dart';
 import 'package:get/get.dart';
 
-class Modelcontroller extends GetxController{
+class ModelController extends GetxController {
+  var newModel = <Model>[].obs;
 
-
-  var newmodel = <Model>[].obs;
-  heredata()async{
-
-
+  void fetchData() async {
+    print('fetchData called');
     try {
       var data = await dataservice.getdata();
+      print('data fetched: $data');
       if (data != null) {
-        newmodel.value = data;
+        newModel.assignAll(data);
+        print('newModel length: ${newModel.length}');
+      } else {
+        print('data is null or empty');
       }
     } catch (e) {
-     Get.snackbar("id"," $e");
+      print('Error fetching data: $e');
+      Get.snackbar("Error", "$e");
     }
-    
   }
+
 
 
   @override
   void onInit() {
-    heredata();
+    fetchData();
     super.onInit();
   }
 }

@@ -14,7 +14,7 @@ class userhome extends StatefulWidget{
 }
 
 class _userhomeState extends State<userhome> {
-  final newcontroller=Get.put(Modelcontroller());
+  final newcontroller=Get.put(ModelController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,9 @@ class _userhomeState extends State<userhome> {
 
     return
     ListView.builder(
-          itemCount: newcontroller.newmodel.length,
+          itemCount: newcontroller.newModel.length,
                itemBuilder: (context, index) {
-                 final data = newcontroller!.newmodel[index];
+                 final data = newcontroller!.newModel[index];
                  return
                    Padding(
                      padding: const EdgeInsets.all(8.0),     child: Container(alignment: AlignmentDirectional.centerStart,
