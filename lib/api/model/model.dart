@@ -1,39 +1,37 @@
 // To parse this JSON data, do
 //
-//     final new = newFromJson(jsonString);
+//     final model = modelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Newmodel > newmodelFromJson(String str) => List<Newmodel >.from(json.decode(str).map((x) => Newmodel .fromJson(x)));
+List<Model> modelFromJson(String str) => List<Model>.from(json.decode(str).map((x) => Model.fromJson(x)));
 
-String newToJson(List<Newmodel > data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String modelToJson(List<Model> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Newmodel {
+class Model {
   int? id;
-  String? title;
-  double? price;
-  String? description;
+   String? title;
+  int? price;String? description;
   String? category;
   String? image;
   Rating? rating;
 
-  Newmodel ({
+  Model({
      this.id,
      this.title,
-     this.price,
-    this.description,
-     this.category,
-     this.image,
-     this.rating,
+   this.price, this.description,
+    this.category,
+   this.image,
+    this.rating,
   });
 
-  factory Newmodel .fromJson(Map<String, dynamic> json) => Newmodel(
-    id: json["id"] as int?,
-    title: json["title"] as String?,
+  factory Model.fromJson(Map<String, dynamic> json) => Model(
+    id: json["id"] as int,
+    title: json["title"] as String? ,
     price: json["price"]?.toDouble(),
     description: json["description"] as String?,
-    category: json["category"] as String?,
-    image: json["image"] as String?,
+    category: json["category"] as String? ,
+    image: json["image"] as String? ,
     rating: Rating.fromJson(json["rating"]) as Rating?,
   );
 
@@ -53,8 +51,8 @@ class Rating {
   int? count;
 
   Rating({
-    required this.rate,
-    required this.count,
+   this.rate,
+    this.count,
   });
 
   factory Rating.fromJson(Map<String, dynamic> json) => Rating(

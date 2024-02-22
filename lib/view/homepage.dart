@@ -2,7 +2,10 @@ import 'package:apiintegrationnew/controller/newcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+void main(){
 
+  runApp(MaterialApp(home: HomePage(),));
+}
 class HomePage extends StatelessWidget {
   final controller = Get.put(Newcontroller());
 
