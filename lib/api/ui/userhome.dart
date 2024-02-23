@@ -43,7 +43,10 @@ class _userhomeState extends State<userhome> {
                     Text(data.id.toString()),
                     Text(data.price.toString()),
                     Text(data.title.toString()),
-                    Text(data.rating.toString())
+
+
+                    Image(image: NetworkImage(data.image.toString()),fit: BoxFit.fill,),
+                    Text(data.rating!.rate.toString()),
                    ],
                ),
                    ),
