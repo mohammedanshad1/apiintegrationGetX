@@ -45,6 +45,7 @@ class _userhomeState extends State<home> {
                           Text(data.id.toString()),
                           Text(data.userId.toString()),
                           Text(data.date.toString()),
+                          Text(data.products.toString())
 
                         ],
                       ),

@@ -40,17 +40,17 @@ class UserModel {
 }
 
 class Product {
-  int productId;
-  int quantity;
+  int? productId;
+  int? quantity;
 
   Product({
-    required this.productId,
-    required this.quantity,
+    this.productId,
+     this.quantity,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
-    productId: json["productId"],
-    quantity: json["quantity"],
+    productId: json["productId"]??.0,
+    quantity: json["quantity"]??.0,
   );
 
   Map<String, dynamic> toJson() => {
