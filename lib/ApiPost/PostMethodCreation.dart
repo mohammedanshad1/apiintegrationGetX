@@ -43,7 +43,7 @@ class _PostmethodState extends State<Postmethod> {
               ),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: "Enter Name Here"),
+                    border: OutlineInputBorder(), hintText: "Enter Password Here"),
                 controller: jobController,
               ),
               SizedBox(
