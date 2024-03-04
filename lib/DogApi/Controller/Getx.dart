@@ -12,7 +12,7 @@ class ModelsController extends GetxController {
       var data = await Modelsservice.getdata();
       print('data fetched: $data');
       if (data != null) {
-        newModel.assignAll(data);
+        newModel.assignAll(data as Iterable<Models>);
         print('newModel length: ${newModel.length}');
       } else {
         print('data is null or empty');

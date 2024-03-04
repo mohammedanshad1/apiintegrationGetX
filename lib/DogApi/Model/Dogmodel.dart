@@ -4,8 +4,9 @@
 
 import 'dart:convert';
 
-List<Models> modelsFromJson(String str) => List<Models>.from(json.decode(str).map((x) => Models.fromJson(x)));
-//String modelsToJson(Models data) => json.encode(data.toJson());
+Models modelsFromJson(String str) => Models.fromJson(json.decode(str));
+
+String modelsToJson(Models data) => json.encode(data.toJson());
 
 class Models {
   String? activity;

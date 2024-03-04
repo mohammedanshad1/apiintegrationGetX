@@ -23,7 +23,7 @@ class ApiService{
       var response = await http.post(Uri.parse(urls),body: data);
       var body = json.decode(response.body);
       print(body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Created Successfully !'),
 
