@@ -1,4 +1,5 @@
 import 'package:apiintegrationnew/api/ui/userhome.dart';
+
 import 'package:apiintegrationnew/view/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -38,8 +39,9 @@ class MyApp extends StatelessWidget {
       //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       //   useMaterial3: true,
       // ),
-     // home:// home(),
-    );
+     // home:HomePage(),
+
+      );
   }
 }
 //

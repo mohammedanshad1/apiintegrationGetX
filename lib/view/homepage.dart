@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                         Text(data.id.toString()),
                         Text(data.price.toString()),
                         Text(data.title.toString()),
-                        Text(data.rating.toString())
+                        Text(data.rating!.rate!.toString())
 
                       ],
                 ),

@@ -1,107 +1,89 @@
-import 'package:apiintegrationnew/api/controller/modelcontroller.dart';
+
+
+import 'package:apiintegrationnew/Apinew/View/products.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-void main() {
+import '../controller/modelcontroller.dart';
+
+
+void main(){
   runApp(DevicePreview(
-    builder: (BuildContext context)
-    => MaterialApp(useInheritedMediaQuery: true,debugShowCheckedModeBanner: false,
-      home: userhome(),
-    ),
-  ));
+      builder: (BuildContext context)
+      =>MaterialApp(home: Homepage(),useInheritedMediaQuery: true,debugShowCheckedModeBanner: false,)));
 }
+class Homepage extends StatelessWidget {
+  Homepage({Key? key}) : super(key: key);
 
-class userhome extends StatefulWidget {
-
-  @override
-  State<userhome> createState() => _userhomeState();
-}
-
-class _userhomeState extends State<userhome> {
-  var size,height,width;
-
-  final newcontroller = Get.put(ModelController());
+  final ctrl = Get.put(Controller());
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
-    height = size.height;
-    width = size.width;
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Shopping"),
-        backgroundColor: Colors.green,
-        leading: Icon(
-          Icons.menu,
-          color: Colors.white,
-        ),
+      appBar: AppBar(title: Text("Products"),
+
+
+      backgroundColor: Colors.green,
+
       ),
-      body: 
-      Container(
-        height: double.infinity,//half of the height size
-        width: double.infinity,//half of the width size
-        child: Obx(() {
-          return GridView.builder(
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
-              itemCount: newcontroller.newModel.length,
-              itemBuilder: (context, index) {
-                final data = newcontroller!.newModel[index];
+      body: Obx(() {
+        return ctrl.loading.value
+            ? Center(
+          child: CircularProgressIndicator(),
+        )
+            : Container(
+          child: GridView.builder(
+            itemCount: ctrl.model.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
 
-                return Card(
-                  child: Column(
-                    children: [
-                      Image(
-                        image: NetworkImage(data.image.toString(),),height: 200,width: 200,
+            ),
+            itemBuilder: (context, index) {
+              var data = ctrl.model.value[index];
 
-                      ),
-                      Text(data.title.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.black),),
-                      // Text(data.id.toString()),
-                      // Text(data.price.toString()),
 
-                      Container(height: 50,width: 50,
-                          decoration: BoxDecoration(color: Colors.blue,
-                          borderRadius: BorderRadius.circular(4)),
-                          child: Row(
-                            children: [
-                              Text(data.rating!.rate.toString(),style: TextStyle(color: Colors.white),),
-                              Icon(Icons.star,color: Colors.white,size: 16,)
-                            ],
-                          ))
+              return Card(
 
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                        child: Column(
+                          children: [
+                            Image(image: NetworkImage(data.image.toString()),height: 100,width: 100,),
+                            Text(
+                              data.title.toString() ?? "",
+
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
+
+                            Text(data.description.toString()),
+
+                            SizedBox(height: 50,width: 50,
+                              child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(0),
+                              color: Colors.blue),
+                                  child: Row(
+                                    children: [
+                                      Text(data.rating!.rate!.toString()),
+                                      Icon(Icons.star,color: Colors.white,)
+                                    ],
+                                  )),
+                            ),
+                            Text(data.price.toString()),
+
+
+
+                          ],
+                        )),
                   ),
-                );
-              });
-          // ListView.builder(
-          //       itemCount: newcontroller.newModel.length,
-          //            itemBuilder: (context, index) {
-          //              final data = newcontroller!.newModel[index];
-          //              return
-          //                Padding(
-          //                  padding: const EdgeInsets.all(8.0),     child: Container(alignment: AlignmentDirectional.centerStart,
-          //                decoration: BoxDecoration(borderRadius: BorderRadius.circular(
-          //                 10),color: Colors.green),
-          //                  child: Column(
-          //               children:<Widget> [
-          //
-          //                 Text(data.id.toString()),
-          //                 Text(data.price.toString()),
-          //                 Text(data.title.toString()),
-          //
-          //
-          //                 Image(image: NetworkImage(data.image.toString()),fit: BoxFit.fill,),
-          //                 Text(data.rating!.rate.toString()),
-          //                ],
-          //            ),
-          //                ),
-          //                );
-          //           });
-        }),
-      ),
+
+              );
+            },
+          ),
+        );
+      }),
     );
   }
 }

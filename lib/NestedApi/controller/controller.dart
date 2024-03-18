@@ -1,33 +1,34 @@
+
+
+
 import 'dart:convert';
 
-
-import 'package:apiintegrationnew/Apinew/Modelclass/usermodel.dart';
 import 'package:apiintegrationnew/NestedApi/model/modelclass.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-
-import '../model/model.dart';
+import 'package:http/http.dart'as http;
 
 
-class Controller extends GetxController {
-  var model = <Model>[].obs;
+
+
+class controller extends GetxController {
+  var username = <User>[].obs;
   var loading = true.obs;
 
   getData() async {
     loading.value = true;
-    String url = "https://fakestoreapi.com/products?limit=5";
+    String url = "https://jsonplaceholder.typicode.com/users";
     var res = await http.get(Uri.parse(url));
     try {
       if (res.statusCode == 200) {
         var jsonData = json.decode(res.body);
         // Check if jsonData is a list or a single object
         if (jsonData is List) {
-          model.value = List<Model>.from(
-            jsonData.map((x) => Model.fromJson(x)),
+          username.value = List<User>.from(
+            jsonData.map((x) => User.fromJson(x)),
           );
         } else if (jsonData is Map<String, dynamic>) {
           // If jsonData is a single object, convert it to a list containing one object
-          model.value = [Model.fromJson(jsonData)];
+          username.value = [User.fromJson(jsonData)];
         }
         loading.value = false;
       } else {

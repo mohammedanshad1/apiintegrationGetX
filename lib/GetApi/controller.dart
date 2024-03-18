@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 
 
@@ -6,28 +7,28 @@ import 'package:apiintegrationnew/NestedApi/model/modelclass.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-import '../model/model.dart';
+import 'model.dart';
 
 
-class Controller extends GetxController {
-  var model = <Model>[].obs;
+class DatasController extends GetxController {
+  var models = <Models>[].obs;
   var loading = true.obs;
 
   getData() async {
     loading.value = true;
-    String url = "https://fakestoreapi.com/products?limit=5";
+    String url = "https://reqres.in/api/users?page=2";
     var res = await http.get(Uri.parse(url));
     try {
       if (res.statusCode == 200) {
         var jsonData = json.decode(res.body);
         // Check if jsonData is a list or a single object
         if (jsonData is List) {
-          model.value = List<Model>.from(
-            jsonData.map((x) => Model.fromJson(x)),
+          models.value = List<Models>.from(
+            jsonData.map((x) => Models.fromJson(x)),
           );
         } else if (jsonData is Map<String, dynamic>) {
           // If jsonData is a single object, convert it to a list containing one object
-          model.value = [Model.fromJson(jsonData)];
+          models.value = [Models.fromJson(jsonData)];
         }
         loading.value = false;
       } else {

@@ -1,11 +1,15 @@
 
 
 import 'package:apiintegrationnew/Apinew/View/products.dart';
+import 'package:apiintegrationnew/GetApi/datumui.dart';
+import 'package:apiintegrationnew/GetApi/supportui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'controller.dart';
 
-import '../controller/usercontroller.dart';
+
+
 
 void main(){
   runApp(MaterialApp(home: Homepage(),));
@@ -13,7 +17,7 @@ void main(){
 class Homepage extends StatelessWidget {
   Homepage({Key? key}) : super(key: key);
 
-  final ctrl = Get.put(DataController());
+  final ctrl = Get.put(DatassController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,21 +30,20 @@ class Homepage extends StatelessWidget {
         )
             : Container(
           child: GridView.builder(
-            itemCount: ctrl.name.length,
+            itemCount: ctrl.modelss.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 2,
               mainAxisSpacing: 2,
             ),
             itemBuilder: (context, index) {
-              var data = ctrl.name.value[index];
-           //var products = ctrl.name.value[index].v?.products;
+              var data = ctrl.modelss.value[index];
+              //var products = ctrl.name.value[index].v?.products;
 
               return Card(
-                child: InkWell(
+                child: GestureDetector(
                   onTap: () {
-                 // Get.to(Products22(productss: [products],));
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Products22()));
+                  //  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>DatumUipage()));
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -54,9 +57,7 @@ class Homepage extends StatelessWidget {
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(data.userId.toString()),
-
-
+                    Text(data.userId.toString() ??"")
 
                           ],
                         )),

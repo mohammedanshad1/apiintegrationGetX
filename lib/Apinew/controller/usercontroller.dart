@@ -1,34 +1,44 @@
-//import 'package:apiintegrationnew/api/model/model.dart';
-//import 'package:apiintegrationnew/api/service/httpservicenew.dart';
+import 'dart:convert';
+
+
+import 'package:apiintegrationnew/Apinew/Modelclass/usermodel.dart';
+import 'package:apiintegrationnew/NestedApi/model/modelclass.dart';
 import 'package:get/get.dart';
-import 'package:apiintegrationnew/Apinew/Service/httpservice.dart';
-import '../Modelclass/usermodel.dart';
+import 'package:http/http.dart' as http;
 
-class UserModelController extends GetxController {
-  var userModel = <UserModel>[].obs;
 
-  void fetchDatas() async {
-    print('fetchData called');
+class DataController extends GetxController {
+  var name = <UserModel>[].obs;
+  var loading = true.obs;
+
+  getData() async {
+    loading.value = true;
+    String url = "https://fakestoreapi.com/carts?userId=1";
+    var res = await http.get(Uri.parse(url));
     try {
-      var datas = await userservice.getdata();
-      print('data fetched: $datas');
-      if (datas != null) {
-        userModel.assignAll(datas);
-        print('newModel length: ${userModel.length}');
+      if (res.statusCode == 200) {
+        var jsonData = json.decode(res.body);
+        // Check if jsonData is a list or a single object
+        if (jsonData is List) {
+          name.value = List<UserModel>.from(
+            jsonData.map((x) => UserModel.fromJson(x)),
+          );
+        } else if (jsonData is Map<String, dynamic>) {
+          // If jsonData is a single object, convert it to a list containing one object
+          name.value = [UserModel.fromJson(jsonData)];
+        }
+        loading.value = false;
       } else {
-        print('data is null or empty');
+        throw Exception('Failed to load data');
       }
     } catch (e) {
-      print('Error fetching data: $e');
-      Get.snackbar("Error", "$e");
+      print("$e");
     }
   }
 
-
-
   @override
   void onInit() {
-    fetchDatas();
+    getData();
     super.onInit();
   }
 }
