@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:apiintegrationnew/Apinew/Modelclass/productmodel.dart';
+
 List<UserModel> userModelFromJson(String str) => List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));
 
 String userModelToJson(List<UserModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -12,13 +14,14 @@ class UserModel {
   int id;
   int userId;
   DateTime date;
+  List<Product>products;
   int v;
 
   UserModel({
     required this.id,
     required this.userId,
     required this.date,
-   // required this.products,
+    required this.products,
     required this.v,
   });
 
@@ -26,7 +29,7 @@ class UserModel {
     id: json["id"],
     userId: json["userId"],
     date: DateTime.parse(json["date"]),
-  //  products: List<Product>.from(json["products"].map((x) => Product.fromJson(x))),
+    products: List<Product>.from(json["products"].map((x) => Product.fromJson(x))).toList(),
     v: json["__v"],
   );
 
@@ -34,7 +37,7 @@ class UserModel {
     "id": id,
     "userId": userId,
     "date": date.toIso8601String(),
-   // "products": List<dynamic>.from(products.map((x) => x.toJson())),
+    "products": List<dynamic>.from(products.map((x) => x.toJson())),
     "__v": v,
   };
 }

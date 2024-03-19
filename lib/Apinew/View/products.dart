@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../Modelclass/productmodel.dart';
 import '../Modelclass/usermodel.dart';
 import '../controller/productcontrolller.dart';
 
 
 class Products22 extends StatelessWidget {
- // final List<Product> productss;
+   final List<Product> product;
+
+   Products22({Key? key,  required this.product}) : super(key: key);
 
   final ctrl = Get.put(ProductController());
 
@@ -19,14 +22,14 @@ class Products22 extends StatelessWidget {
         leading: Icon(Icons.arrow_back),
       ),
       body: GridView.builder(
-        itemCount: ctrl.product.length,
+        itemCount: product.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 8,
           mainAxisSpacing: 8,
         ),
         itemBuilder: (context, index) {
-             var data = ctrl.product.value[index];
+             var data = product[index];
 
           return Card(
             child: InkWell(

@@ -35,12 +35,20 @@ class Homepage extends StatelessWidget {
             itemBuilder: (context, index) {
               var data = ctrl.name.value[index];
            //var products = ctrl.name.value[index].v?.products;
+              var products=data.products;
+
 
               return Card(
                 child: InkWell(
                   onTap: () {
                  // Get.to(Products22(productss: [products],));
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Products22()));
+                   // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Products22()));
+                    if ( products!= null) {
+
+                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>Products22(  product: products!,)));
+                    } else {
+                      // Handle null variants
+                    }
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
